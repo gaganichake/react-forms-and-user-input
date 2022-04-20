@@ -1,7 +1,6 @@
-import { useRef, useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 
 const SimpleInput = (props) => {
-  const nameInputRef = useRef();
   const [enteredName, setEnteredName] = useState("");
   const [enteredNameIsValid, setEnteredNameIsValid] = useState(false);
   const [enteredNameTouched, setEnteredNameTouched] = useState(false);
@@ -35,10 +34,6 @@ const SimpleInput = (props) => {
     }
     setEnteredNameIsValid(true);
 
-    const enteredValue = nameInputRef.current.value;
-    console.log(enteredValue); // Vanilla JavaScript
-    nameInputRef.current.value = ""; // Not ideal, don't manipulate the DOM directly.
-
     console.log(enteredName);
     setEnteredName('');
   };
@@ -51,11 +46,11 @@ const SimpleInput = (props) => {
       <div className={nameInputClasses}>
         <label htmlFor="name">Your Name</label>
         <input
-          ref={nameInputRef}
           onChange={nameInputChangeHandler}
           onBlur={nameInputBlurHandler}
           type="text"
           id="name"
+          value={enteredName}
         />
       </div>
       {nameInputIsInvalid && <p className="error-text">Name must not be empty.</p>}
