@@ -3,8 +3,8 @@ import { useRef, useState, useEffect } from "react";
 const SimpleInput = (props) => {
   const nameInputRef = useRef();
   const [enteredName, setEnteredName] = useState("");
-  const [enteredNameIsValid, setEnteredNameIsValid] = useState(true);
-  const [enteredNameTouched, setEnteredNameTouched] = useState(true);
+  const [enteredNameIsValid, setEnteredNameIsValid] = useState(false);
+  const [enteredNameTouched, setEnteredNameTouched] = useState(false);
 
   useEffect(() => {
     if(enteredNameIsValid) {
@@ -44,7 +44,7 @@ const SimpleInput = (props) => {
         <label htmlFor="name">Your Name</label>
         <input ref={nameInputRef} onChange={nameInputChangeHandler} type="text" id="name" />
       </div>
-      {!enteredNameIsValid && <p className="error-text">Name must not be empty.</p>}
+      {nameInputIsInvalid && <p className="error-text">Name must not be empty.</p>}
       <div className="form-actions">
         <button>Submit</button>
       </div>
